@@ -141,9 +141,7 @@ class BertForResumeBinaryMHAConcatClassification(BertPreTrainedModel):
         pooled_output = torch.reshape(pooled_output, (batch_size, n_lines, self.hidden_size))
         all_encoding_output = types_encodings + j_to_r_att + r_to_j_att + pooled_output
         all_encoding_output = self.dropout(all_encoding_output)  # (batch_size, n_lines, self.hidden_size)
-        all_encoding_output = torch.sum(all_encoding_output, dim=1).squeeze()  # (batch_size, self.hidden_size)
-        if len(list(pooled_job_description_output.size())) == 2:
-            pooled_job_description_output = torch.squeeze(pooled_job_description_output, dim=0)
+        all_encoding_output = torch.sum(all_encoding_output, dim=1)  # (batch_size, self.hidden_size)
         all_encoding_output = torch.cat((all_encoding_output, pooled_job_description_output), dim=-1)
         logits = self.classifier(all_encoding_output)
         outputs = (logits,)

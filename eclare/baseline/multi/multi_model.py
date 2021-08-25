@@ -41,7 +41,7 @@ class BertForResumeClassification(BertPreTrainedModel):
         types_encodings = self.type_embeddings(types_encoding_ids)
         all_encoding_output = types_encodings + pooled_output
         all_encoding_output = self.dropout(all_encoding_output)  # (batch_size, n_lines, self.hidden_size)
-        all_encoding_output = torch.sum(all_encoding_output, dim=1).squeeze()
+        all_encoding_output = torch.sum(all_encoding_output, dim=1)
         logits = self.classifier(all_encoding_output)
         outputs = (logits,)
         if labels is not None:

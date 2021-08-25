@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 # Author: hankcs
 # Date: 2021-05-27 20:14
+import json
+
 import elit
 import eclare
 
@@ -152,4 +154,4 @@ rchili_sample.update({
     "applied_job_description": "Handles or assists with administrative activities generally associated with the conduct of clinical trials. Maintains data pertaining to research projects, completes source documents/case report forms, and performs data entry. Assists with patient recruitment. Attends study meetings. Orders and maintains equipment and supplies. Reviews medical records and/or conducts screenings for recruitment of study participants, performs interviews and QOL questionnaires. Collects study specimen according to protocol which may include phlebotomy, processing, and preparation for shipping. Coordinates services, schedules procedures, creates and maintains case packages, and monitors charges. Assists with quality assurance and tracks regulatory submissions. Performs related approved responsibilities as required.   MINIMUM QUALIFICATIONS: (1.) High School Diploma or GED and three years of administrative support experience OR (2.) Two years of college in a scientific, health related, or business administration program and one year of admin support or customer service experience OR (3.) Licensed as a practical nurse (LPN) and one year admin support or one year of licensed practical nursing experience OR (4.) Bachelor's degree, Master's degree, MD or PhD in a scientific, health related or business administration program.   This position is intended to support clinical research and all clinical training requirements must be tracked and monitored through Emory Healthcare under the credentialing category of CLINICAL RESEARCHER.",
 })
 accept = classifier([rchili_sample])
-print(accept)
+print(json.dumps(accept, indent=2))

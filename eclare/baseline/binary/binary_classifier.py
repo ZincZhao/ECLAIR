@@ -117,8 +117,12 @@ class BinaryClassifier(TorchComponent):
         predictions = []
         for batch in dataloader:
             output_dict = self.feed_batch(batch)
-            prediction = self.decode(output_dict[0])
-            predictions.extend([self.vocabs['label'].idx_to_token[x] for x in prediction.tolist()])
+            prediction = self.decode(output_dict[0], output_probs=True)
+            probs = [dict(zip(self.vocabs['label'].idx_to_token, x)) for x in prediction.tolist()]
+            predictions.extend([{
+                "best_prediction": [max(p.items(), key=lambda t: t[1])],
+                "predictions": p
+            } for p in probs])
             orders.extend(batch[IDX])
         predictions = reorder(predictions, orders)
         if flat:
@@ -145,7 +149,10 @@ class BinaryClassifier(TorchComponent):
                           types_encoding_ids=batch['type_input_ids'], job_description_ids=batch['job_input_ids'],
                           job_description_attention_mask=batch['job_attention_masks'], labels=batch.get('label_id'))
 
-    def decode(self, logits):
+    def decode(self, logits, output_probs=False):
+        if output_probs:
+            probs = torch.nn.functional.softmax(logits, dim=-1)
+            return probs
         return logits.argmax(-1, keepdim=True)
 
     def report_metrics(self, loss, metric):

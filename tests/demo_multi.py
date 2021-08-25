@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 # Author: hankcs
 # Date: 2021-08-19 17:57
+import json
+
 import elit
 import eclare
 
@@ -149,4 +151,4 @@ rchili_sample = {
 }
 
 crc = classifier([rchili_sample])
-print(crc)
+print(json.dumps(crc, indent=2))
