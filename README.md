@@ -4,6 +4,8 @@
 pip install -e .
 ```
 
+For GPU support, refer to [ELIT doc](https://github.com/emorynlp/elit/blob/main/docs/getting_started.md).
+
 ## how to use
 
 ### competence prediction

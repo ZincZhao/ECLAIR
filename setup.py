@@ -48,7 +48,7 @@ setup(
     packages=find_packages(exclude=['docs', 'tests*']),
     include_package_data=True,
     install_requires=[
-        'elit',
+        'elit==2.0.0a6',
     ],
     python_requires='>=3.7',
 )
