@@ -28,7 +28,7 @@ with open(join(this_dir, "eclare", "__init__.py")) as fp:
     exec(fp.read(), version)
 
 setup(
-    name='elit',
+    name='ECLARe',
     version=version['__version__'],
     description='xxxx',
     long_description=long_description,
