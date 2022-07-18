@@ -11,5 +11,6 @@ class duplication_extractor:
         c = f['Certification']
         e = f['Experience']
         jp = f['JobProfile']
-        res = {'Qualification': q, 'Certification': c, 'Experience': e, 'JobProfile': jp}
+        # res = {'Qualification': q, 'Certification': c, 'Experience': e, 'JobProfile': jp}
+        res = q + ' ' + c + ' ' + e + ' ' + jp
         return res
