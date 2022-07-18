@@ -1,7 +1,10 @@
-from eclare.duplication.extract.duplication_extractor import duplication_extractor
+from datasets import load_dataset
 
-extractor = duplication_extractor
+from eclare.duplication.extract.duplication_generator import duplication_generator
 
-res = extractor.extract('../rchilli/40431.json')
-
-print(res)
+generator = duplication_generator
+compare_dd = load_dataset("imdb")
+dd = generator.generate('../res/data_splits.xlsx', '../res/rchilli/')
+print(dd)
+print(compare_dd['test'][0])
+print(compare_dd)
