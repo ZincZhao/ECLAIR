@@ -6,14 +6,18 @@ import pandas
 from eclare.duplication.extract.duplication_extractor import duplication_extractor
 
 
-class duplication_generator:
+class duplication_generator_expanded:
     def generate(s: str, dir: str) -> datasets.DatasetDict:
         extractor = duplication_extractor
 
-        df_trn = pandas.read_excel(s, usecols='A, C')
+        df_trn = pandas.read_excel(s, usecols='A, C', sheet_name=[0, 3])
         # df_trn['data'].replace(['NQ', 'CRCI', 'CRCII', 'CRCIII', 'CRCIV'], [0, 1, 2, 3, 4])
-        df_trn = df_trn.to_dict('split')
-        df_trn = df_trn['data']
+        df_trn_aux = []
+        for elem in df_trn:
+            dc = df_trn[elem].to_dict('split')['data']
+            for e in dc:
+                df_trn_aux.append(e)
+        df_trn = df_trn_aux
 
         df_dev = pandas.read_excel(s, usecols='A, C', sheet_name=1)
         df_dev = df_dev.to_dict('split')
